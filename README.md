@@ -149,6 +149,6 @@ Please help make this package better by:
 - making feature requests. Matplotlib is an enormous library and this supports only a part of it. Let me know if there particular charts that you would like to be converted to ASCII
 - letting me know what you use this for.
 
-If you want to tell me about any of the above just use the Issues tab for now.
+If you want to tell me about any of the above just use the Discussions tab for now.
 
 Thanks for reading and I hope you will like these plots as much as I do :-)
