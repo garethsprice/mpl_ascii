@@ -16,12 +16,18 @@ def parse(obj: YAxis) -> list[Union[Shape, TextElement]]:
 
     ticks: list[Shape] = []
 
+    major_ticks = obj.get_major_ticks()
+
     def ticks_on_right_side() -> bool:
-        tick = obj.get_major_ticks()[0]
+        if not major_ticks:
+            return False
+        tick = major_ticks[0]
         return tick.tick2line.get_visible()
 
+    if not major_ticks:
+        return []
 
-    for t in obj.get_major_ticks():
+    for t in major_ticks:
         if t.get_loc() < y_min or t.get_loc() > y_max:
             continue
 
