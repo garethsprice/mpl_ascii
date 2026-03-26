@@ -11,8 +11,24 @@ class CharGenerator:
     _index: int = field(init=False, default=0)
 
     def __post_init__(self):
+        # Preferred fill characters: block elements first for dense, readable fills,
+        # then fall back to printable ASCII.
+        preferred = [
+            "\u2588",  # █ full block
+            "\u2593",  # ▓ dark shade
+            "\u2592",  # ▒ medium shade
+            "\u2591",  # ░ light shade
+            "\u25A0",  # ■ black square
+            "\u25CF",  # ● black circle
+            "\u25C6",  # ◆ black diamond
+            "\u25B2",  # ▲ black up triangle
+            "\u2022",  # • bullet
+            "\u25AA",  # ▪ small black square
+        ]
         ascii_range = [chr(i) for i in range(33, 127)]  # Printable ASCII
-        self._chars = [c for c in ascii_range if c not in self.exclude]
+        seen = set(preferred) | self.exclude
+        remaining = [c for c in ascii_range if c not in seen]
+        self._chars = [c for c in preferred if c not in self.exclude] + remaining
 
         if not self._chars:
             raise ValueError("No characters available for generation.")
